@@ -7,9 +7,11 @@ phases:
     commands:
       - echo "Installing dependencies..."
       - apt-get update
-      - apt-get install -y firefox
+      - apt-get install -y wget tar
+      - wget -q -O firefox.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
+      - tar -xjf firefox.tar.bz2 -C /opt/
+      - ln -s /opt/firefox/firefox /usr/bin/firefox
       - wget -q -O /usr/local/bin/geckodriver https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz
-      - tar -xzf /usr/local/bin/geckodriver -C /usr/local/bin/
       - chmod +x /usr/local/bin/geckodriver
       - pip install -r requirements.txt
   build:
