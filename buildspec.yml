@@ -6,6 +6,7 @@ phases:
       python: 3.8
     commands:
       - echo "Installing dependencies..."
+      - apt-get update && apt-get install -y firefox
       - pip install -r requirements.txt
   build:
     commands:
