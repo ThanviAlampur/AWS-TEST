@@ -7,7 +7,7 @@ import time
 def test_google_title():
     # Configure Firefox options
     options = Options()
-    # options.add_argument("--headless")  # Run in headless mode (remove for visible mode)
+    options.add_argument("--headless")  # Run in headless mode (remove for visible mode)
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
 
