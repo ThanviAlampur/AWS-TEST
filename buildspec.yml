@@ -5,6 +5,8 @@ phases:
     commands:
       - echo "Installing dependencies..."
       - sudo yum update -y
+      - sudo amazon-linux-extras enable epel
+      - sudo yum install -y epel-release
       - sudo yum install -y firefox
       - wget https://github.com/mozilla/geckodriver/releases/latest/download/geckodriver-linux64.tar.gz
       - tar -xvzf geckodriver-linux64.tar.gz
