@@ -5,13 +5,18 @@ phases:
     commands:
       - echo "Installing dependencies..."
       - sudo yum update -y
-      - sudo amazon-linux-extras enable epel
+      # Add EPEL Repository
+      - sudo yum install -y yum-utils
+      - sudo yum-config-manager --add-repo https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
       - sudo yum install -y epel-release
+      # Install Firefox
       - sudo yum install -y firefox
+      # Install GeckoDriver
       - wget https://github.com/mozilla/geckodriver/releases/latest/download/geckodriver-linux64.tar.gz
       - tar -xvzf geckodriver-linux64.tar.gz
       - sudo mv geckodriver /usr/local/bin/
       - geckodriver --version
+      # Python dependencies
       - python -m pip install --upgrade pip
       - pip install -r requirements.txt
   build:
