@@ -6,9 +6,17 @@ phases:
       python: 3.8
     commands:
       - echo "Installing dependencies..."
-      - apt-get update && apt-get install -y firefox
+      - apt-get update
+      - apt-get install -y firefox
+      - wget -q -O /usr/local/bin/geckodriver https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz
+      - tar -xzf /usr/local/bin/geckodriver -C /usr/local/bin/
+      - chmod +x /usr/local/bin/geckodriver
       - pip install -r requirements.txt
   build:
     commands:
+      - echo "Validating Firefox installation..."
+      - firefox --version
+      - echo "Validating GeckoDriver installation..."
+      - geckodriver --version
       - echo "Running Selenium tests..."
       - python test_script.py
