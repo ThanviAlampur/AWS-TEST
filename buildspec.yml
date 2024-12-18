@@ -2,23 +2,17 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      python: 3.8
     commands:
       - echo "Installing dependencies..."
-      - apt-get update
-      - apt-get install -y wget tar
-      - wget -q -O firefox.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
-      - tar -xjf firefox.tar.bz2 -C /opt/
-      - ln -s /opt/firefox/firefox /usr/bin/firefox
-      - wget -q -O /usr/local/bin/geckodriver https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz
-      - chmod +x /usr/local/bin/geckodriver
+      - sudo yum update -y
+      - sudo yum install -y firefox
+      - wget https://github.com/mozilla/geckodriver/releases/latest/download/geckodriver-linux64.tar.gz
+      - tar -xvzf geckodriver-linux64.tar.gz
+      - sudo mv geckodriver /usr/local/bin/
+      - geckodriver --version
+      - python -m pip install --upgrade pip
       - pip install -r requirements.txt
   build:
     commands:
-      - echo "Validating Firefox installation..."
-      - firefox --version
-      - echo "Validating GeckoDriver installation..."
-      - geckodriver --version
       - echo "Running Selenium tests..."
       - python test_script.py
